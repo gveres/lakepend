@@ -3,7 +3,8 @@
             [clj-time.core :as t]
             [clj-time.format :as tf]
             [clj-time.coerce :refer [to-long from-long]]
-            [lakepend.request :refer [fetch-seq-for-year]]))
+            [lakepend.request :refer [fetch-seq-for-year]]
+            [lakepend.db :as db]))
 
 (defn datetime-str->ms
   [format-str v]
@@ -31,3 +32,20 @@
      :air_temp air-temp
      :baro baro
      :wind_speed wind-speed}))
+
+(defn record-data-for-year!
+  [year]
+  (let [last-dt db/find-last-datetime
+        data-seq (fetch-seq-for-year year)]
+    (doseq [row-group (partition-all 1000 data-seq)]
+      (let [weather-data (map transform-row row-group)
+            new-weather-data (filter #(> (:recorded_at %) last-dt) weather-data)]
+        db/insert-weather-data new-weather-data))))
+
+(defn sync!
+  []
+  (println "Fetching remote data...")
+  (let [begin-year (t/year (from-long (db/find-last-datetime)))
+        end-year (t/year (t/now))]
+    (doseq [year (range begin-year (inc end-year))]
+      (record-data-for-year! year))))
