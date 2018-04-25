@@ -20,3 +20,14 @@
 (defn iso8601->ms
   [v]
   (datetime-str->ms "yyyy_MM_dd'T'HH:mm:ss" v))
+
+(defn transform-row
+  [row-str]
+  (let [row-data (str/split row-str #"\s+")
+        [date time air-temp baro _ _ _ _ wind-speed] row-data
+        dt-ms (iso8601->ms (str date "T" time))
+        [air-temp baro wind-speed](map #(Double/parseDouble %) [air-temp baro wind-speed])]
+    {:recorded_at dt-ms
+     :air_temp air-temp
+     :baro baro
+     :wind_speed wind-speed}))
