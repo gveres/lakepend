@@ -4,8 +4,8 @@
 
 (defn build-url
   [year]
-  (str "https://github.com/lyndadotcom/LPO_weatherdata/blob/master/Environmental_Data_Deep_Moor_"
-       year ".txt?raw=true"))
+  (str "https://raw.githubusercontent.com/lyndadotcom/LPO_weatherdata/master/Environmental_Data_Deep_Moor_"
+       year ".txt"))
 
 (defn fetch-for-year
   [year]
