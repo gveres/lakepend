@@ -49,3 +49,16 @@
         end-year (t/year (t/now))]
     (doseq [year (range begin-year (inc end-year))]
       (record-data-for-year! year))))
+
+(defn submit-query!
+  [start-date end-date]
+  (db/find-data-in-range (cal->ms start-date) (cal->ms end-date)))
+
+(defn display-query-result
+  [start-date end-date]
+  (let [result (submit-query! start-date end-date)
+        {:keys [avg_wind_speed avg_air_temp avg_baro
+                med_wind_speed med_air_temp med_baro]} result]
+    (println         "       | Wind spd  | Air Temp   | Baro")
+    (println (format "Mean   | %.2f      | %.2f      | %.2f" avg_wind_speed avg_air_temp avg_baro))
+    (println (format "Median | %.2f      | %.2f      | %.2f" med_wind_speed med_air_temp med_baro))))
