@@ -12,9 +12,9 @@
 (defn find-last-datetime
   []
   (->
-  (jdbc/query db-conf "select recorded_at from weather order by recorded_at desc limit 1")
-  first
-  :recorded_at))
+   (jdbc/query db-conf "select recorded_at from weather order by recorded_at desc limit 1")
+   first
+   :recorded_at))
 
 (def avg-median-query
   "select avg(wind_speed) as avg_wind_speed,
@@ -28,4 +28,4 @@
 (defn find-data-in-range
   [start-ms end-ms]
   (first
-  (jdbc/query db-conf [avg-median-query start-ms end-ms])))
+   (jdbc/query db-conf [avg-median-query start-ms end-ms])))
