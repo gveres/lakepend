@@ -54,6 +54,10 @@
   [start-date end-date]
   (db/find-data-in-range (cal->ms start-date) (cal->ms end-date)))
 
+(defn submit-timeline-query!
+  [start-date end-date]
+  (db/find-data-series-in-range (cal->ms start-date) (cal->ms end-date)))
+
 (defn display-query-result
   [start-date end-date]
   (let [result (submit-query! start-date end-date)

@@ -35,4 +35,9 @@
         :return {:result Weather-Avg-Med}
         :query-params [start-date :- String, end-date :- String]
         :summary "Shows average and median weather data for date range"
-        (ok {:result (be/submit-query! start-date end-date)})))))
+        (ok {:result (be/submit-query! start-date end-date)}))
+
+      (GET "/timeline" []
+        :query-params [start-date :- String, end-date :- String]
+        :summary "Gets all data points for date range"
+        (ok {:result (be/submit-timeline-query! start-date end-date)})))))

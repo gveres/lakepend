@@ -25,7 +25,14 @@
           median(baro) as med_baro
    from weather where recorded_at >= ? AND recorded_at <= ?")
 
+(def timeline-query
+  "select recorded_at, wind_speed, air_temp, baro from weather where recorded_at >= ? AND recorded_at <= ?")
+
 (defn find-data-in-range
   [start-ms end-ms]
   (first
    (jdbc/query db-conf [avg-median-query start-ms end-ms])))
+
+(defn find-data-series-in-range
+  [start-ms end-ms]
+  (jdbc/query db-conf [timeline-query start-ms end-ms]))
