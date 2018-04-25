@@ -3,7 +3,8 @@
                  [org.clojure/java.jdbc "0.5.8"]
                  [org.xerial/sqlite-jdbc "3.8.11.2"]
                  [clj-http "2.1.0"]
-                 [clj-time "0.11.0"]]
+                 [clj-time "0.11.0"]
+                 [proto-repl "0.3.1"]]
   :main lakepend.core
   :uberjar-name "lakepend.jar"
   :profiles {:uberjar {:aot :all}})
