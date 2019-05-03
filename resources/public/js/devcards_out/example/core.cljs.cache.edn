@@ -1,0 +1,2 @@
+;; Analyzed by ClojureScript 1.7.170
+{:name example.core, :doc nil, :excludes #{}, :use-macros {defcard devcards.core}, :require-macros {devcards.core devcards.core, sab sablono.core, sablono.core sablono.core}, :uses nil, :requires {sab sablono.core, sablono.core sablono.core}, :imports nil, :cljs.analyzer/constants {:seen #{:path :my-first-card :func :name :documentation :main-obj :initial-data :options :example.core}, :order [:path :func :example.core :my-first-card :name :documentation :main-obj :initial-data :options]}}
